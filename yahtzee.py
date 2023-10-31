@@ -12,8 +12,8 @@ class YahtzeeMainClass:
             
             while intTurn < 3:
                 print(f"Starting turn: {intTurn+1} of 3, rolling dice")
-                for i, d in enumerate(self.ds):
-                    d.DieRoll()
+                for i, d in enumerate(self.ds, 1):
+                    #d.DieRoll()
                     # d.value = 5  # Test if yahtzee works
                     print(f"{i}: {d}")
                 # YAHTZEE
