@@ -15,35 +15,47 @@ class YatzyGameClass:
             #YatzyGameClass.intTurn = 0
 # here we should have some start and stop option in order to control the function my_yatzy
         #flag = True
-        #initialise flag as a boolean variable to control the loop logic and becomes as " stop button"
+        #initialise "flag" as a boolean variable to control the loop logic and becomes as " stop button"
         def wrapper(self):
             flag = True
 
 # here comes while loop to wrapp the conditions of the game:
             while self.intTurn < 3:
                 for j in range(1,5):
-                    if YatzyGameClass.ds[j].value != YatzyGameClass.ds[j-1].value:
+                    if self.ds[j].value != self.ds[j-1].value:
                         flag == False
                 if flag == True:
-                    print(f'You got Yatzy in {YatzyGameClass.ds[0].value}s')
+                    print(f'You got Yatzy in {self.ds[0].value}s')
                     return
-                elif YatzyGameClass.intTurn != 2:
+                elif self.intTurn != 2:
                     if input('want to throw again?( "y" for yes anything else for no)') == 'y':
-                        YatzyGameClass.intTurn =+ 1
+                        self.intTurn += 1
+                        self.roll_start()
                     else:
 
-                        YatzyGameClass.goOn != YatzyGameClass.goOn
+                        self.goOn = not self.goOn
                         break
                 else:
                     if input( 'Game Over want to play again?')== 'y':
-                        YatzyGameClass.intTurn = 0
+                        self.intTurn = 0
                     else:
-                        YatzyGameClass.goOn = not YatzyGameClass.goOn
+                        self.goOn = not self.goOn
                     break
-            result = f(YatzyGameClass.intTurn)
+            result = f(self)
             return result               
         
         return wrapper
+    
+    def roll_start(self):
+
+        print('Welcome to Yahtzee')
+    
+        print(f'starting turn: {self.intTurn +1} of 3, rolling dice')
+        #while len(self.ds) < 6:
+        for i, d in enumerate(self.ds, 1):
+            d.Die_roll()
+            print(f'{i}, {d}')
+                #self.ds.append(turn)
 
 
     
@@ -51,19 +63,18 @@ class YatzyGameClass:
     #creating en decorator in order to reuse this func my_yatzy in a another function-yatzy_go to modifie game conditions inuti this function's wrapper
     @yatzy_go
     def my_yatzy(self):
-        while self.goOn == True:
-            intTurn = 0
-
-            print('Welcome to Yahtzee')
-            while intTurn < 3:
-                print(f'starting turn: {intTurn +1} of 3, rolling dice')
-                for i, d in enumerate(self.ds, 1):
-                    print(f'{i}, {d}')
-            return YatzyGameClass.my_yatzy
+        while self.goOn:
+            print(self.roll_start())
+#we move the control function to decorator yatzy_go so while loop is there, here is only basic function that runs and the control is in the decorator
+            
+            #return self.my_yatzy
         
 def main():
-    YatzyGameClass()
-    if __name__ == '__main__':
+    game = YatzyGameClass()
+    game.my_yatzy()
+
+
+if __name__ == '__main__':
         main()
 
 
