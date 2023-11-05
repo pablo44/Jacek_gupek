@@ -5,7 +5,7 @@ from Jacek_die import Die
 class YatzyGameClass:
 
     def __init__(self):
-        self.ds = [Die(), Die(), Die(), Die(),Die()]
+        self.ds = []
         self.goOn = True
         self.intTurn = 0
 
@@ -21,10 +21,13 @@ class YatzyGameClass:
 
 # here comes while loop to wrapp the conditions of the game:
             while self.intTurn < 3:
+                if len(self.ds)== 0:
+                    self.roll_start()
                 for j in range(1,5):
-                    if self.ds[j].value != self.ds[j-1].value:
-                        flag == False
-                if flag == True:
+                    if len(self.ds) > 0 and self.ds[j].value != self.ds[j-1].value:
+                        flag = False
+                        
+                if flag:
                     print(f'You got Yatzy in {self.ds[0].value}s')
                     return
                 elif self.intTurn != 2:
@@ -46,15 +49,22 @@ class YatzyGameClass:
         
         return wrapper
     
+    
     def roll_start(self):
 
         print('Welcome to Yahtzee')
     
-        print(f'starting turn: {self.intTurn +1} of 3, rolling dice')
-        #while len(self.ds) < 6:
-        for i, d in enumerate(self.ds, 1):
+            #while len(self.ds) <5:
+        for i in range(5):
+            d = Die()
             d.Die_roll()
+           
+            self.ds.append(d)
             print(f'{i}, {d}')
+        
+
+        
+
                 #self.ds.append(turn)
 
 
@@ -64,10 +74,11 @@ class YatzyGameClass:
     @yatzy_go
     def my_yatzy(self):
         while self.goOn:
-            print(self.roll_start())
+            print(f'starting turn: {self.intTurn +1} of 3, rolling dice')
+            self.roll_start()
 #we move the control function to decorator yatzy_go so while loop is there, here is only basic function that runs and the control is in the decorator
             
-            #return self.my_yatzy
+            
         
 def main():
     game = YatzyGameClass()
