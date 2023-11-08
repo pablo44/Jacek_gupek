@@ -1,16 +1,8 @@
 #new game try one
 from Jacek_die import Die
 
-
-class YatzyGameClass:
-
-    def __init__(self):
-        self.ds = []
-        self.goOn = True
-        self.intTurn = 0
-
-
-    def yatzy_go(f):
+#all the decorator's code should be outside a class
+def yatzy_go(f):
         #while YatzyGameClass.goOn == True:
             #YatzyGameClass.intTurn = 0
 # here we should have some start and stop option in order to control the function my_yatzy
@@ -20,10 +12,10 @@ class YatzyGameClass:
             flag = True
 
 # here comes while loop to wrapp the conditions of the game:
-            while self.intTurn < 3:
+            while self.intTurn < 3: 
                 if len(self.ds)== 0:
                     self.roll_start()
-                for j in range(1,5):
+                for j in range(1,5):    
                     if len(self.ds) > 0 and self.ds[j].value != self.ds[j-1].value:
                         flag = False
                         
@@ -38,9 +30,13 @@ class YatzyGameClass:
 
                         self.goOn = not self.goOn
                         break
+                    #to avoid infinit loop after game over sinc we beeb calling roll_start, we call the whole game instead by calling main() and setting constraint int.Turn<3 to avoid infinit loop
                 else:
                     if input( 'Game Over want to play again?')== 'y':
-                        self.intTurn = 0
+                        while self.intTurn < 3:
+                            main()
+                        
+                        
                     else:
                         self.goOn = not self.goOn
                     break
@@ -48,11 +44,20 @@ class YatzyGameClass:
             return result               
         
         return wrapper
+
+class YatzyGameClass:
+
+    def __init__(self):
+        self.ds = []
+        self.goOn = True
+        self.intTurn = 0
+
+
+    
     
     
     def roll_start(self):
-
-        print('Welcome to Yahtzee')
+     
     
             #while len(self.ds) <5:
         for i in range(5):
@@ -60,7 +65,9 @@ class YatzyGameClass:
             d.Die_roll()
            
             self.ds.append(d)
-            print(f'{i}, {d}')
+            print(f'{i+1}, {d}')
+            
+            
         
 
         
@@ -81,6 +88,7 @@ class YatzyGameClass:
             
         
 def main():
+    print('Welcome to Yahtzee')
     game = YatzyGameClass()
     game.my_yatzy()
 
