@@ -1,6 +1,8 @@
 #new game try one
 from Jacek_die import Die
 
+#in general code is devided in a structure so it is like this: basic game my_yatzhy is send to another function -decorator yatzy_go and ther it is run and undercontrol of diffret conditions. function my_yatzy uses a little helpin function on it's run-roll_start
+
 #all the decorator's code should be outside a class
 def yatzy_go(f):
         #while YatzyGameClass.goOn == True:
@@ -30,7 +32,7 @@ def yatzy_go(f):
 
                         self.goOn = not self.goOn
                         break
-                    #to avoid infinit loop after game over sinc we beeb calling roll_start, we call the whole game instead by calling main() and setting constraint int.Turn<3 to avoid infinit loop
+                    #to avoid infinit loop after game over since we are calling roll_start, we call the whole game instead by calling main() and setting constraint int.Turn<3 to avoid infinit loop-everything here is a secure the game since the intTurn variable is not exactly clear thought over in my game logic
                 else:
                     if input( 'Game Over want to play again?')== 'y':
                         while self.intTurn < 3:
