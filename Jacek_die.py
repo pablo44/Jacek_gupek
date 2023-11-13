@@ -3,7 +3,7 @@ import random
 
 
 class Die:
-
+#we get out of functionality in __int__ and keep it in func Die_roll not to cofuse in the main code and avoid duble running diffrent functionalities
     def __init__(self):
         self.value = None
 
