@@ -5,11 +5,7 @@ from Jacek_die import Die
 
 #all the decorator's code should be outside a class
 def yatzy_go(f):
-        #while YatzyGameClass.goOn == True:
-            #YatzyGameClass.intTurn = 0
-# here we should have some start and stop option in order to control the function my_yatzy
-        #flag = True
-        #initialise "flag" as a boolean variable to control the loop logic and becomes as " stop button"
+        
         def wrapper(self):
             flag = True
 
@@ -36,9 +32,8 @@ def yatzy_go(f):
                 else:
                     if input( 'Game Over want to play again?')== 'y':
                         while self.intTurn < 3:
-                            main()
-                        
-                        
+                            main()                      
+                      
                     else:
                         self.goOn = not self.goOn
                     break
@@ -47,47 +42,36 @@ def yatzy_go(f):
         
         return wrapper
 
+
+
 class YatzyGameClass:
 
     def __init__(self):
         self.ds = []
         self.goOn = True
-        self.intTurn = 0
-
-
-    
+        self.intTurn = 0    
     
     
     def roll_start(self):
-     
-    
-            #while len(self.ds) <5:
+                
         for i in range(5):
             d = Die()
             d.Die_roll()
-           
             self.ds.append(d)
-            print(f'{i+1}, {d}')
+            print(f'{i+1}, {d}')     
             
-            
-        
-
-        
-
-                #self.ds.append(turn)
-
-
+             
+           
     
-
     #creating en decorator in order to reuse this func my_yatzy in a another function-yatzy_go to modifie game conditions inuti this function's wrapper
     @yatzy_go
     def my_yatzy(self):
         while self.goOn:
             print(f'starting turn: {self.intTurn +1} of 3, rolling dice')
             self.roll_start()
-#we move the control function to decorator yatzy_go so while loop is there, here is only basic function that runs and the control is in the decorator
-            
-            
+    #we move the control function to decorator yatzy_go so while loop is there, here is only basic function that runs and the control is in the decorator
+          
+           
         
 def main():
     print('Welcome to Yahtzee')
